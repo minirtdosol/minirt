@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:33:18 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/09 15:35:42 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/10 20:13:19 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_color3	ray_color(t_scene *scene);
 t_bool		hit(t_object *obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_obj(t_object *obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_sphere(t_object *world, t_ray *ray, t_hit_record *rec);
+t_bool		hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec);
 void		set_face_normal(t_ray *r, t_hit_record *rec);
 t_color3	phong_lighting(t_scene *scene);
 t_color3	point_light_get(t_scene *scene, t_light *light);

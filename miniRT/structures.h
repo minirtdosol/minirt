@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:15:50 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/09 19:03:10 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/10 17:55:34 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,18 @@ typedef struct s_hit_record t_hit_record;
 typedef struct s_object	t_object;
 typedef struct s_sphere	t_sphere;
 typedef struct s_light	t_light;
-//mlx 구조체
-typedef struct s_data	t_data;
+typedef struct s_plane	t_plane;
 //식별자 매크로
 typedef int				t_bool;
 # define FALSE 0
 # define TRUE 1
 typedef int		t_object_type;
 # define SP 0
+# define PL 4
+# define CY 5
 # define LIGHT_POINT 1
 # define EPSILON 1e-6 // 0.0000001
 # define LUMEN 3 // 이 값을 조절하여 장면의 밝기를 조절할 수 있다.
-
-struct						s_cntl
-{
-	void		*mlx;
-	void		*win;
-	t_scene		*scene;
-	int			mode;
-	int			light_on;
-	t_bool		rotate_on;
-};
-
 
 struct s_vec3
 {
@@ -64,15 +54,6 @@ struct s_ray
 	t_vec3		dir;
 };
 
-struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-};
-
 struct s_camera
 {
 	t_point3	orig; // 카메라 원점(위치)
@@ -82,6 +63,12 @@ struct s_camera
 	t_vec3		vertical; // 수직 길이 벡터
 	double		focal_len; // 카메라와 뷰포트 사이의 거리
 	t_point3	left_bottom; // 왼쪽 아래 코너점
+};
+
+struct s_plane
+{
+	t_point3	center; // 평면의 중심
+	t_vec3		dir; // 평면이 가리키는 방향
 };
 
 struct s_canvas

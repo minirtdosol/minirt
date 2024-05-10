@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:20:53 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/09 17:03:59 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/10 20:17:12 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,9 @@ t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 	if (world -> type == SP)
 		// hit_sphere의 첫번째 인자도 t_sphere *에서 t_object *로 수정해주자.
 		hit_result = hit_sphere(world, ray, rec); 
+	else if (world -> type == PL)
+		hit_result = hit_plane(world, ray, rec);
+	// else if (world -> type == CY)
+	// 	hit_result = hit_cylinder(world, ray, rec);
 	return (hit_result);
 }

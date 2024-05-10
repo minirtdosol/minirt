@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:39:02 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/08 21:04:40 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/10 20:36:44 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ t_sphere	*sphere(t_point3 center, double radius)
 	sp -> radius = radius;
 	sp -> radius2 = radius * radius;
 	return (sp);
+}
+
+t_plane	*plane(t_point3 center, t_vec3 dir)
+{
+	t_plane	*pl;
+
+	if (!(pl = (t_plane *)malloc(sizeof(t_plane))))
+		return (NULL);
+	pl -> center = center;
+	dir = vunit(dir);
+	pl -> dir = dir;
+	return (pl);
 }
 
 t_light	*light_point(t_point3 light_origin, t_color3 light_color, double bright_ratio)
