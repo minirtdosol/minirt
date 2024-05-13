@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/10 20:47:23 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/13 21:06:32 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ t_scene	*scene_init(void)
 		return (NULL);
 	scene -> canvas = canvas(1000, 1000);
 	scene -> camera = camera(&scene -> canvas, point3(0, 0, 0));
-	world = object(SP, sphere(point3(1, 2, -5), 1), color3(0.5, 0, 0));
-	oadd(&world, object(SP, sphere(point3(-1, 2, -5), 1), color3(0, 0.5, 0)));
-	oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
-	// oadd(&world, object(PL, plane(point3(0, 0, 1), vec3(0, 1, 2)), color3(255, 0, 0)));
+	world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
+	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
+	oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 0.5, 1), color3(0, 0.5, 0)));
+	// oadd(&world, object(PL, plane(point3(0, 0, -1), vec3(0, 1, 2)), color3(1, 0.5, 1)));
 	scene -> world = world;
-	lights = object(LIGHT_POINT, light_point(point3(0, 5, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0)); //더미 albedo
+	lights = object(LIGHT_POINT, light_point(point3(0, 5, -3), color3(1, 1, 1), 0.5), color3(0, 0, 0)); //더미 albedo
 	scene->light = lights;
 	ka = 0.1;
 	scene->ambient = vmult(color3(1, 1, 1), ka);
@@ -77,11 +77,11 @@ int	main(void)
 			//ray from camera origin to pixel;
 			scene -> ray = ray_primary(&scene -> camera, u, v);
 			pixel_color = ray_color(scene);
+			// write_color(pixel_color);
 			x = (int)(pixel_color.x * 255.999);
 			y = (int)(pixel_color.y * 255.999);
 			z = (int)(pixel_color.z * 255.999);
 			mlx_pixel_put(mlx_ptr, win_ptr, i, scene -> canvas.height - 1 - j, create_trgb(0, x, y, z));
-			// write_color(pixel_color);
 			i++;
 		}
 		--j;

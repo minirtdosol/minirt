@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:39:02 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/10 20:36:44 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/10 21:28:51 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,20 @@ t_plane	*plane(t_point3 center, t_vec3 dir)
 	dir = vunit(dir);
 	pl -> dir = dir;
 	return (pl);
+}
+
+t_cylinder	*cylinder(t_point3 center, t_vec3 dir, double dmt, double hgt)
+{
+	t_cylinder	*cy;
+
+	if (!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
+		return (NULL);
+	cy -> center = center;
+	dir = vunit(dir);
+	cy -> dir = dir;
+	cy -> diameter = dmt;
+	cy -> height = hgt;
+	return (cy);
 }
 
 t_light	*light_point(t_point3 light_origin, t_color3 light_color, double bright_ratio)

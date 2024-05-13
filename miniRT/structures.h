@@ -6,34 +6,36 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:15:50 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/10 17:55:34 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/13 20:15:13 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 //전체 구조체
-typedef struct s_scene	t_scene;
+typedef struct s_scene		t_scene;
 //벡터 구조체
-typedef struct s_vec3	t_vec3;
-typedef struct s_vec3	t_point3;
-typedef struct s_vec3	t_color3;
+typedef struct s_vec3		t_vec3;
+typedef struct s_vec3		t_point3;
+typedef struct s_vec3		t_color3;
 //광선 구조체
-typedef struct s_ray	t_ray;
+typedef struct s_ray		t_ray;
 // 장면 구조체
-typedef struct s_camera	t_camera;
-typedef struct s_canvas	t_canvas;
+typedef struct s_camera		t_camera;
+typedef struct s_canvas		t_canvas;
 // 오브젝트 구조체
-typedef struct s_hit_record t_hit_record;
-typedef struct s_object	t_object;
-typedef struct s_sphere	t_sphere;
-typedef struct s_light	t_light;
-typedef struct s_plane	t_plane;
+typedef struct s_hit_record	t_hit_record;
+typedef struct s_object		t_object;
+typedef struct s_sphere		t_sphere;
+typedef struct s_light		t_light;
+typedef struct s_plane		t_plane;
+typedef struct s_cylinder	t_cylinder;
+typedef struct s_cylinops	t_cylinops;
 //식별자 매크로
-typedef int				t_bool;
+typedef int					t_bool;
+typedef int					t_object_type;
 # define FALSE 0
 # define TRUE 1
-typedef int		t_object_type;
 # define SP 0
 # define PL 4
 # define CY 5
@@ -65,11 +67,11 @@ struct s_camera
 	t_point3	left_bottom; // 왼쪽 아래 코너점
 };
 
-struct s_plane
+struct s_cylinops
 {
-	t_point3	center; // 평면의 중심
-	t_vec3		dir; // 평면이 가리키는 방향
+	double	hit_height;
 };
+
 
 struct s_canvas
 {
@@ -92,6 +94,25 @@ struct s_sphere
 	t_point3	center;
 	double		radius;
 	double		radius2;
+};
+// 평면 구조체
+struct s_plane
+{
+	t_point3	center; // 평면의 중심
+	t_vec3		dir; // 평면이 가리키는 방향
+};
+
+// 원기둥 구조체
+struct s_cylinder
+{
+	t_point3	center; // 원기둥의 중중심심
+	t_vec3		dir; // 원기둥이 가리키는 방향
+	t_vec3		bot;
+	double		diameter; // 원기둥의 직경
+	double		height; // 원기둥의 높이
+	double		hit_height; // hit 높이
+	t_point3	up;
+	t_point3	down;
 };
 
 struct s_light
