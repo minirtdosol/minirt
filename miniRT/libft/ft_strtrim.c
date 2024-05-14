@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 16:00:03 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 12:39:44 by soljeong         ###   ########.fr       */
+/*   Created: 2023/10/14 11:35:03 by soljeong          #+#    #+#             */
+/*   Updated: 2023/10/14 13:44:00 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "structures.h"
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	start;
+	size_t	last;
 
-
-void	write_color(t_color3 pixel_color);
-void	print_error(char *msg);
-#endif
+	start = 0;
+	last = ft_strlen(s1) - 1;
+	if (!ft_strlen(set) || !ft_strlen(s1))
+		return (ft_strdup(s1));
+	while (ft_strchr((char *)set, s1[start]))
+		start++;
+	while (ft_strchr((char *)set, s1[last]))
+		last--;
+	return (ft_substr(s1, start, last - start + 1));
+}

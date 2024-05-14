@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 16:00:03 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 12:39:44 by soljeong         ###   ########.fr       */
+/*   Created: 2023/10/16 19:53:46 by soljeong          #+#    #+#             */
+/*   Updated: 2023/10/18 18:21:31 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "structures.h"
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
 
-
-void	write_color(t_color3 pixel_color);
-void	print_error(char *msg);
-#endif
+	if (*lst == 0)
+	{
+		*lst = new;
+		return ;
+	}
+	last = ft_lstlast(*lst);
+	last -> next = new;
+}

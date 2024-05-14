@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 16:00:03 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 12:39:44 by soljeong         ###   ########.fr       */
+/*   Created: 2023/10/12 18:45:54 by soljeong          #+#    #+#             */
+/*   Updated: 2023/10/14 12:26:45 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "structures.h"
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char	*dst2;
+	unsigned char	*src2;
 
-
-void	write_color(t_color3 pixel_color);
-void	print_error(char *msg);
-#endif
+	dst2 = (unsigned char *)dst;
+	src2 = (unsigned char *)src;
+	if (dst <= src)
+		ft_memcpy(dst, src, len);
+	else
+	{
+		while (len > 0)
+		{
+			len--;
+			dst2[len] = src2[len];
+		}
+	}
+	return (dst);
+}

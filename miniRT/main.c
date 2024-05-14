@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/10 20:47:23 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/13 19:58:09 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 #include "print.h"
 #include "scene.h"
 #include "trace.h"
+#include "parse.h"
+#include <fcntl.h>
+#include <unistd.h>
 
-t_scene	*scene_init(void)
+t_scene	*scene_init(int fd)
 {
 	t_scene		*scene;
 	t_object	*world;
 	t_object	*lights;
-	double		ka;
 
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
+	parse_rt(fd, scene);
 	scene -> canvas = canvas(1000, 1000);
 	scene -> camera = camera(&scene -> canvas, point3(0, 0, 0));
 	world = object(SP, sphere(point3(1, 2, -5), 1), color3(0.5, 0, 0));
@@ -34,8 +37,8 @@ t_scene	*scene_init(void)
 	scene -> world = world;
 	lights = object(LIGHT_POINT, light_point(point3(0, 5, 0), color3(1, 1, 1), 0.5), color3(0, 0, 0)); //더미 albedo
 	scene->light = lights;
-	ka = 0.1;
-	scene->ambient = vmult(color3(1, 1, 1), ka);
+	//ka = 0.1;
+	//scene->ambient = vmult(color3(1, 1, 1), ka);
 	//ambient는 ambient lighting의 색과 ambient lighting의 강도(ambient strength) 계수인
 	//ka의 곱으로 표현된다. ka 값은 장면의 원하는 밝기에 따라 [0 ~ 1] 사이의 값으로 설정하면 된다.
 	return (scene);
@@ -46,7 +49,7 @@ int create_trgb(int t, int r, int g, int b)
 }
 
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
 	int			i;
 	int			j;
@@ -59,8 +62,18 @@ int	main(void)
 	int x;
 	int y;
 	int z;
+	int	fd;
 
-	scene = scene_init();
+	if (argc !=2 || is_rt_file(argv[1]) == FAIL)
+		print_error(": Wrong arguments");
+	fd = open(argv[1],O_RDONLY);
+	if (fd < 0)
+	{
+		perror("Error\n");
+		exit(1);
+	}
+	scene = scene_init(fd);
+	close(fd);
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, scene -> canvas.width, scene -> canvas.height, "Hellow World!");
 	// 랜더링

@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 16:00:03 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 12:39:44 by soljeong         ###   ########.fr       */
+/*   Created: 2023/10/10 16:32:28 by soljeong          #+#    #+#             */
+/*   Updated: 2023/10/11 20:12:03 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
-
-# include <stdio.h>
-# include "structures.h"
-
-
-void	write_color(t_color3 pixel_color);
-void	print_error(char *msg);
-#endif
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}

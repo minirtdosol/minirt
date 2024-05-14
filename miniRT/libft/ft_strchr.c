@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 16:00:03 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 12:39:44 by soljeong         ###   ########.fr       */
+/*   Created: 2023/10/11 10:54:54 by soljeong          #+#    #+#             */
+/*   Updated: 2023/10/20 11:44:06 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "structures.h"
+char	*ft_strchr(const char *s, int c)
+{
+	char	ch;
 
-
-void	write_color(t_color3 pixel_color);
-void	print_error(char *msg);
-#endif
+	ch = (char) c;
+	while (*s)
+	{
+		if (*s == ch)
+			return ((char *)s);
+		s++;
+	}
+	if (ch == 0)
+		return ((char *)s);
+	return (NULL);
+}

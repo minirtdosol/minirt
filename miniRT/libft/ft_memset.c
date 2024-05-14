@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 16:00:03 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 12:39:44 by soljeong         ###   ########.fr       */
+/*   Created: 2023/10/11 20:12:29 by soljeong          #+#    #+#             */
+/*   Updated: 2023/10/20 11:28:50 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "structures.h"
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*p;
+	unsigned char	*changed;
+	unsigned char	ch;
 
-
-void	write_color(t_color3 pixel_color);
-void	print_error(char *msg);
-#endif
+	p = (unsigned char *)b;
+	changed = (unsigned char *)b + len;
+	ch = (unsigned char)c;
+	while (p != changed)
+	{
+		*p = ch;
+		p++;
+	}
+	return (b);
+}

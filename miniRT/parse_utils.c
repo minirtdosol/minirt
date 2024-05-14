@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 16:00:03 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 12:39:44 by soljeong         ###   ########.fr       */
+/*   Created: 2024/05/13 12:49:31 by soljeong          #+#    #+#             */
+/*   Updated: 2024/05/13 15:51:37 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#include "parse.h"
+#include "libft/libft.h"
 
-# include <stdio.h>
-# include "structures.h"
+int	is_rt_file(char *filename)
+{
+	int	i;
 
-
-void	write_color(t_color3 pixel_color);
-void	print_error(char *msg);
-#endif
+	i = 0;
+	while (filename[i])
+	{
+		if (filename[i] == '.')
+		{
+			if (ft_strncmp(&filename[i], ".rt", 4) == 0)
+				return (SUCCESS);
+			else
+				return (FAIL);
+		}
+		i++;
+	}
+	return (FAIL);
+}
