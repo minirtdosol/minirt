@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:20:53 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/10 20:17:12 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/13 16:17:12 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 		hit_result = hit_sphere(world, ray, rec); 
 	else if (world -> type == PL)
 		hit_result = hit_plane(world, ray, rec);
-	// else if (world -> type == CY)
-	// 	hit_result = hit_cylinder(world, ray, rec);
+	else if (world -> type == CY)
+		hit_result = hit_cylinder(world, ray, rec);
 	return (hit_result);
 }
