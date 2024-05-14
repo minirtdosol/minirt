@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/14 11:13:13 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/14 12:54:48 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@
 t_scene	*scene_init(int fd)
 {
 	t_scene		*scene;
-	t_object	*world;
-	t_object	*lights;
+	//t_object	*world;
+	//t_object	*lights;
 
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
 	parse_rt(fd, scene);
 	scene -> canvas = canvas(1000, 1000);
 	scene -> camera = camera(&scene -> canvas, point3(0, 0, 0));
-	world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
+	//world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
 	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
-	oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 0.5, 1), color3(0, 0.5, 0)));
+	//oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 0.5, 1), color3(0, 0.5, 0)));
 	// oadd(&world, object(PL, plane(point3(0, 0, -1), vec3(0, 1, 2)), color3(1, 0.5, 1)));
-	scene -> world = world;
-	lights = object(LIGHT_POINT, light_point(point3(0, 5, -3), color3(1, 1, 1), 0.5), color3(0, 0, 0)); //더미 albedo
-	scene->light = lights;
+	//scene -> world = world;
+	//lights = object(LIGHT_POINT, light_point(point3(0, 5, -3), color3(1, 1, 1), 0.5), color3(0, 0, 0)); //더미 albedo
+	//scene->light = lights;
 	//ka = 0.1;
 	//scene->ambient = vmult(color3(1, 1, 1), ka);
 	//ambient는 ambient lighting의 색과 ambient lighting의 강도(ambient strength) 계수인

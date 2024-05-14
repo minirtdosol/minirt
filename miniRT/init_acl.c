@@ -1,0 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_acl.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/14 13:30:21 by soljeong          #+#    #+#             */
+/*   Updated: 2024/05/14 13:37:14 by soljeong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "structures.h"
+# include "parse.h"
+# include "libft/libft.h"
+# include "scene.h"
+# include "print.h"
+
+void	init_ambient(char **line_splited, t_scene *scene)
+{
+	double	ka;
+	t_color3	color;
+
+	ka = ft_atod(line_splited[1]);
+	if (ka < 0 || ka > 1)
+		print_error("Wrong ambient");
+	color = parse_rgb(line_splited[2]);
+	scene->ambient = vmult(color, ka);
+}
+
+
+void	init_light(char **line_splited, t_scene *scene)
+{
+	t_vec3	point;
+	double	bright_ratio;
+	t_vec3	color;
+
+	point = parse_point(line_splited[1]);
+	bright_ratio = ft_atod(line_splited[2]);
+	if (bright_ratio < 0 || bright_ratio > 1)
+		print_error("Wrong bright_ratio");
+	color = parse_rgb(line_splited[3]);
+	scene->light = object(LIGHT_POINT, light_point(point, color, bright_ratio), color3(1,1,1));
+}

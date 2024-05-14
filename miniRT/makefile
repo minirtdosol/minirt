@@ -6,7 +6,10 @@ SRC =  canvas.c main.c print.c ray.c scene.c utils.c hit_sphere.c phong_lighting
 	parse.c\
 	get_next_line.c\
 	get_next_line_utils.c\
-	hit_cylinder.c
+	hit_cylinder.c\
+	parse_utils.c\
+	init_object.c\
+	init_acl.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT_DIR = ./libft/
