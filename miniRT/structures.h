@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:15:50 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 20:15:13 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/14 17:53:12 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_ray		t_ray;
 // 장면 구조체
 typedef struct s_camera		t_camera;
 typedef struct s_canvas		t_canvas;
+typedef struct s_camera_set	t_camera_set;
 // 오브젝트 구조체
 typedef struct s_hit_record	t_hit_record;
 typedef struct s_object		t_object;
@@ -56,6 +57,20 @@ struct s_ray
 	t_vec3		dir;
 };
 
+struct	s_camera_set
+{
+	t_vec3	lookat;
+	t_vec3	vup;
+	double	theta;
+	double viewport_w;
+	double	viewport_h;
+	double	half_width;
+	t_vec3	w;
+	t_vec3	u;
+	t_vec3	v;
+};
+
+
 struct s_camera
 {
 	t_point3	orig; // 카메라 원점(위치)
@@ -63,8 +78,12 @@ struct s_camera
 	double		viewport_w; // 뷰포트 가로 길이
 	t_vec3		horizontal; // 수평 길이 벡터
 	t_vec3		vertical; // 수직 길이 벡터
-	double		focal_len; // 카메라와 뷰포트 사이의 거리
 	t_point3	left_bottom; // 왼쪽 아래 코너점
+	t_vec3		dir;// 카메라 벡터
+	t_vec3		right_normal; //카메라 벡터가 평면이 아닐때의 left bottom을 구하기 위해
+	t_vec3		up_normal; // 위와 동문
+	double		fov; // 화각
+	double		focal_len; //화각에 따라 카메라와 viewport와의 거리가 달라진다.
 };
 
 struct s_cylinops
@@ -137,7 +156,7 @@ struct s_hit_record
 struct s_scene
 {
 	t_canvas		canvas;
-	t_camera		camera;
+	t_camera		*camera;
 	t_object		*world;
 	t_object		*light;
 	t_color3		ambient;

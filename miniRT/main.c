@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 21:06:32 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/15 16:53:00 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_scene	*scene_init(void)
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
 	scene -> canvas = canvas(1000, 1000);
-	scene -> camera = camera(&scene -> canvas, point3(0, 0, 0));
+	scene -> camera = camera_init(point3(0, 0, 0), vec3(0, 0, 1), 90);
+	camera(&scene -> canvas, scene -> camera);
 	world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
 	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
 	oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 0.5, 1), color3(0, 0.5, 0)));
@@ -75,7 +76,7 @@ int	main(void)
 			u = (double)i / (scene -> canvas.width - 1);
 			v = (double)j / (scene -> canvas.height - 1);
 			//ray from camera origin to pixel;
-			scene -> ray = ray_primary(&scene -> camera, u, v);
+			scene -> ray = ray_primary(scene -> camera, u, v);
 			pixel_color = ray_color(scene);
 			// write_color(pixel_color);
 			x = (int)(pixel_color.x * 255.999);

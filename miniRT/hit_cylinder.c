@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 21:19:06 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 21:06:41 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/14 15:35:31 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,46 +34,10 @@ t_vec3	get_cylinder_normal(t_cylinder *cy, t_vec3 at_point, double hit_height)
 
 	hit_center = vplus(cy -> down, vmult(cy -> dir, hit_height));
 	normal = vminus(at_point, hit_center);
-
 	return (vunit(normal));
 }
 
-// int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double height)
-// {
-// 	t_cylinder	*cy;
-// 	double		r;
-// 	t_vec3		circle_center;
-// 	double		root;
-// 	double		diameter;
-
-// 	cy = cy_obj -> element;
-// 	r = cy -> diameter / 2; // 반지름
-// 	circle_center = vplus(cy -> center, vmult(cy -> dir, height));
-// 	root = vdot(vminus(circle_center, ray -> orig), cy -> dir);
-// 	diameter = vlength(vminus(circle_center, ray_at(ray, root)));
-// 	if (fabs(r) < fabs(diameter))
-// 	{
-// 		printf("1");
-// 		return (0);
-// 	}
-// 	if (root < rec -> tmin || rec -> tmax < root)
-// 	{
-// 		printf("2");
-// 		return (0);
-// 	}
-// 	rec -> t = root;
-// 	rec -> p = ray_at(ray, root);
-// 	rec -> tmax = rec -> t;
-// 	if (0 < height)
-// 		rec -> normal = cy -> dir;
-// 	else
-// 		rec -> normal = vmult(cy -> dir, -1);
-// 	set_face_normal(ray, rec);
-// 	rec -> albedo = cy_obj -> albedo;
-// 	printf("3");
-// 	return (1);
-// }
-int      hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double height)
+int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double height)
 {
     const t_cylinder *cy = cy_obj->element;
     const double r = cy->diameter / 2;

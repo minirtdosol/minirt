@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:34:42 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/09 17:06:26 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/15 16:53:17 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 	ray.orig = cam -> orig;
 	// left_bottom + u * horizontal + v * vectical - origin 의 단위 벡터.
 	ray.dir = vunit(vminus(vplus(vplus(cam -> left_bottom, vmult(cam -> horizontal, u)), vmult(cam -> vertical, v)), cam -> orig));
+	// printf("lookat.x : %f lookat.y : %f lookat.z : %f\n", ray.dir.x, ray.dir.y, ray.dir.z);
+	// printf("lookat.x : %f lookat.y : %f lookat.z : %f\n", cam -> orig.x, cam -> orig.y, cam -> orig.z);
 	return (ray);
 }
+
 
 t_color3	ray_color(t_scene *scene)
 {
