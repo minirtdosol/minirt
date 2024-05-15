@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/15 16:53:00 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/15 19:38:27 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "print.h"
 #include "scene.h"
 #include "trace.h"
+#include "rotate.h"
 
 t_scene	*scene_init(void)
 {
@@ -30,7 +31,7 @@ t_scene	*scene_init(void)
 	camera(&scene -> canvas, scene -> camera);
 	world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
 	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
-	oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 0.5, 1), color3(0, 0.5, 0)));
+	oadd(&world, object(CY, cylinder(point3(0, 0, -3), rotate_init(vec3(0, 1, 0), 0, 0, 90), 0.5, 1), color3(0, 0.5, 0)));
 	// oadd(&world, object(PL, plane(point3(0, 0, -1), vec3(0, 1, 2)), color3(1, 0.5, 1)));
 	scene -> world = world;
 	lights = object(LIGHT_POINT, light_point(point3(0, 5, -3), color3(1, 1, 1), 0.5), color3(0, 0, 0)); //더미 albedo

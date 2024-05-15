@@ -6,7 +6,7 @@
 /*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:15:50 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/14 17:53:12 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/15 19:23:08 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_light		t_light;
 typedef struct s_plane		t_plane;
 typedef struct s_cylinder	t_cylinder;
 typedef struct s_cylinops	t_cylinops;
+//회전 매크로
+typedef struct s_rotate		t_rotate;
 //식별자 매크로
 typedef int					t_bool;
 typedef int					t_object_type;
@@ -70,6 +72,24 @@ struct	s_camera_set
 	t_vec3	v;
 };
 
+struct	s_rotate
+{
+	double	cos_a;
+	double	cos_b;
+	double	cos_r;
+	double	sin_a;
+	double	sin_b;
+	double	sin_r;
+	double	one_one;
+	double	one_two;
+	double	one_three;
+	double	two_one;
+	double	two_two;
+	double	two_three;
+	double	three_one;
+	double	three_two;
+	double	three_three;
+};
 
 struct s_camera
 {
