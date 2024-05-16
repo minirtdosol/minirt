@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 10:59:13 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/13 19:28:07 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:01:08 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static double	ft_make_double(char *str, int flag)
 	decimal = 0.1L;
 	if (*str == '\n')
 		return (total);
-	if (*str  && !ft_isdigit(*str) && !(*str++ == '.'))
+	if (*str && !ft_isdigit(*str) && !(*str++ == '.'))
 	{
 		ft_numerr();
 	}
@@ -88,7 +88,7 @@ static int	ft_isspace(int c)
 		|| c == ' ')
 		return (1);
 	return (0);
-};
+}
 
 static void	ft_numerr(void)
 {

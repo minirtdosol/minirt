@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 16:04:56 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/16 15:29:05 by soljeong         ###   ########.fr       */
+/*   Created: 2024/05/16 15:33:08 by soljeong          #+#    #+#             */
+/*   Updated: 2024/05/16 15:37:26 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
-#include "stdlib.h"
+#include "utils.h"
 
-void	write_color(t_color3 pixel_color)
+t_vec3	vec3(double x, double y, double z)
 {
-	printf("%d %d %d\n", (int)(255.999 * pixel_color.x), \
-	(int)(255.999 * pixel_color.y), \
-	(int)(255.999 * pixel_color.z));
+	t_vec3	vec;
+
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
+	return (vec);
 }
 
-void	print_error(char *msg)
+t_point3	point3(double x, double y, double z)
 {
-	printf("Error\n%s\n", msg);
-	exit(1);
+	t_point3	point;
+
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	return (point);
+}
+
+t_color3	color3(double r, double g, double b)
+{
+	t_color3	color;
+
+	color.x = r;
+	color.y = g;
+	color.z = b;
+	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:32:55 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/13 14:40:57 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:39:30 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ t_list	*ft_search_fd(t_list **list, int fd)
 	return (node);
 }
 
-char	*ft_realloc_gnl(t_list *node, char *str, int str_len, int *str_malloc_size)
+char	*ft_realloc_gnl(t_list *node, char *str, \
+int str_len, int *str_malloc_size)
 {
 	char	*tmp;
 	int		i;

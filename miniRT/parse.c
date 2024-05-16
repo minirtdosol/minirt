@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:10:53 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/16 15:21:36 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:45:30 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "scene.h"
 
 static void	init_arg(char **splited, t_scene *scene, int *acl);
+static void	check_acl(int *acl);
 
 int	parse_rt(int fd, t_scene *scene)
 {
@@ -37,12 +38,26 @@ int	parse_rt(int fd, t_scene *scene)
 		if (str == NULL)
 			break ;
 		if (str[0] == '#' || str[0] == '\n')
+		{
+			free(str);
 			continue ;
+		}
 		splited = ft_split(str, ' ');
 		init_arg(splited, scene, acl);
 		splited_free(splited);
+		free(str);
 	}
+	check_acl(acl);
 	return (0);
+}
+
+static void	check_acl(int *acl)
+{
+	if (!acl[0] || !acl[1] || !acl[2])
+	{
+		print_error("Worng in rt file");
+		exit(1);
+	}
 }
 
 static void	init_arg(char **splited, t_scene *scene, int *acl)

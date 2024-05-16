@@ -1,8 +1,19 @@
 NAME = miniRT
 cc = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 MLXFLAG = -lmlx -framework OpenGL -framework AppKit
-SRC =  canvas.c main.c print.c ray.c scene.c utils.c hit_sphere.c phong_lighting.c object_create.c object_utils.c normal.c hit.c hit_plane.c parse_utils.c\
+SRC =  canvas.c\
+	main.c\
+	print.c\
+	ray.c\
+	scene.c\
+	hit_sphere.c\
+	phong_lighting.c\
+	object_create.c\
+	object_utils.c\
+	normal.c hit.c\
+	hit_plane.c\
+	parse_utils.c\
 	parse.c\
 	get_next_line.c\
 	get_next_line_utils.c\
@@ -12,7 +23,13 @@ SRC =  canvas.c main.c print.c ray.c scene.c utils.c hit_sphere.c phong_lighting
 	parse_utils.c\
 	init_object.c\
 	init_acl.c\
-	rotate.c
+	rotate.c\
+	utils.c\
+	utils2.c\
+	utils3.c\
+	utils4.c\
+	mlx_utils.c
+
 OBJ = $(SRC:.c=.o)
 
 LIBFT_DIR = ./libft/

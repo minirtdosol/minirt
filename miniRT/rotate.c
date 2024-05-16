@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 18:31:44 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/15 19:37:45 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/16 15:30:07 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_vec3	rotate(t_vec3 vec, t_rotate s)
 	new = vec3(x, y, z);
 	return (new);
 }
-
 
 t_vec3	rotate_init(t_vec3 vec, double r, double b, double a)
 {
