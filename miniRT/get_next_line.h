@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:36:50 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/13 14:39:46 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:33:48 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	*ft_lst_del_node_gnl(t_list **list, t_list *node);
 char	*get_next_line(int fd);
 char	*read_copy_line(t_list **list, t_list *node, int new_line);
 int		search_copy_str(t_list *node, char *str, int *flag);
-char	*ft_realloc_gnl(t_list *node, char *str, int str_len, int *str_malloc_size);
+char	*ft_realloc_gnl(t_list *node, char *str, \
+int str_len, int *str_malloc_size);
 char	*ft_strdup_gnl(char *str, int str_len, t_list **list, t_list *node);
 int		read_file(t_list *node, char *str, int flag);
 

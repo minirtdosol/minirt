@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:00:03 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 12:39:44 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:34:55 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdio.h>
 # include "structures.h"
-
 
 void	write_color(t_color3 pixel_color);
 void	print_error(char *msg);
