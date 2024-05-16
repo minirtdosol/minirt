@@ -3,31 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:57:08 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/08 14:29:34 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/14 16:08:22 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
+#define	WIDTH 1000
+#define	HEIGHT 1000
 
-t_camera	camera(t_canvas *canvas, t_point3 orig)
+double	get_tan(double degree)
 {
-	t_camera	cam;
-	double		focal_len;
-	double		viewport_height;
+	static const double radian = M_PI / 180;
+	return (tan(degree * radian));
+}
 
-	viewport_height = 2.0;
-	focal_len = 1.0;
-	cam.orig = orig;
-	cam.viewport_h = viewport_height;
-	cam.viewport_w = viewport_height * canvas -> aspect_ratio;
-	cam.focal_len = focal_len;
-	cam.horizontal = vec3(cam.viewport_w, 0, 0);
-	cam.vertical = vec3(0, cam.viewport_h, 0);
-	// 왼쪽 아래 코너점 좌표, origin - horizontal / 2 - vertical / 2 - vec3(0, 0, focal_length)
-	cam.left_bottom = vminus(vminus(vminus(cam.orig, vdivide(cam.horizontal, 2)),
-								vdivide(cam.vertical, 2)), vec3(0, 0, focal_len));
-	return (cam);
+t_camera	camera(t_canvas *canvas, t_point3 orig, t_vec3 dir, double fov)
+{
+	t_camera    cam;
+    t_vec3      vec_y;
+    t_vec3      vec_z;
+    t_vec3      temp;
+	(void)canvas;
+    
+    vec_y = vec3(0.0, 1.0, 0.0);
+    vec_z = vec3(0.0, 0.0, -1.0);
+    
+    cam.orig = orig;
+    cam.dir = dir;
+    cam.fov = fov;
+    if (vlength(vcross(vec_y, cam.dir)))
+        cam.right_normal = vunit(vcross(cam.dir, vec_y));
+    else 
+        cam.right_normal = vunit(vcross(cam.dir, vec_z));
+    cam.up_normal = vunit(vcross(cam.right_normal, cam.dir));
+    cam.focal_len = WIDTH / 2 / get_tan(cam.fov / 2);
+
+    temp = vplus(cam.orig, vmult(cam.dir, cam.focal_len));
+    temp = vminus(temp, vmult(cam.right_normal, -(WIDTH - 1)/ 2));
+    temp = vminus(temp, vmult(cam.up_normal,-(HEIGHT - 1)/ 2));
+    cam.left_bottom = temp;
+    // print_vec(cam.right_normal);
+    // print_vec(cam.up_normal);
+    // print_vec(cam.left_bottom);
+    return (cam);
 }

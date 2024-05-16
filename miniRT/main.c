@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/14 12:54:48 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:20:36 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "parse.h"
 #include <fcntl.h>
 #include <unistd.h>
+#define HEIGHT 1000
+#define WIDTH 1000
 
 t_scene	*scene_init(int fd)
 {
@@ -27,9 +29,9 @@ t_scene	*scene_init(int fd)
 
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		return (NULL);
-	parse_rt(fd, scene);
 	scene -> canvas = canvas(1000, 1000);
-	scene -> camera = camera(&scene -> canvas, point3(0, 0, 0));
+	parse_rt(fd, scene);
+	//scene -> camera = camera(&scene -> canvas, point3(0, 0, 0));
 	//world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
 	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
 	//oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 0.5, 1), color3(0, 0.5, 0)));
@@ -48,13 +50,12 @@ int create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-
 int	main(int argc, char *argv[])
 {
 	int			i;
 	int			j;
-	double		u;
-	double		v;
+	//double		u;
+	//double		v;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_color3	pixel_color;
@@ -75,27 +76,28 @@ int	main(int argc, char *argv[])
 	scene = scene_init(fd);
 	close(fd);
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, scene -> canvas.width, scene -> canvas.height, "Hellow World!");
+	win_ptr = mlx_new_window(mlx_ptr, WIDTH,HEIGHT, "Hellow World!");
+	
 	// 랜더링
 	// P3는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값
 	// printf("P3\n%d %d\n255\n", scene -> canvas.width, scene -> canvas.height);
-	j = scene -> canvas.height - 1;
+	j = HEIGHT - 1;
 	while (j >= 0)
 	{
 		i = 0;
-		while (i < scene -> canvas.width)
+		while (i < WIDTH)
 		{
-			u = (double)i / (scene -> canvas.width - 1);
-			v = (double)j / (scene -> canvas.height - 1);
+			//u = (double)i / (scene -> canvas.width - 1);
+			//v = (double)j / (scene -> canvas.height - 1);
 			//ray from camera origin to pixel;
-			scene -> ray = ray_primary(&scene -> camera, u, v);
+			scene -> ray = ray_primary(&scene -> camera, i, j);
 			pixel_color = ray_color(scene);
-			// write_color(pixel_color);
 			x = (int)(pixel_color.x * 255.999);
 			y = (int)(pixel_color.y * 255.999);
 			z = (int)(pixel_color.z * 255.999);
-			mlx_pixel_put(mlx_ptr, win_ptr, i, scene -> canvas.height - 1 - j, create_trgb(0, x, y, z));
-			i++;
+			write_color(pixel_color);
+			mlx_pixel_put(mlx_ptr, win_ptr, i, HEIGHT - 1 - j, create_trgb(0,x,y,z));
+			++i;
 		}
 		--j;
  	}

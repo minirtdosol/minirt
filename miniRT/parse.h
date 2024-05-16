@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:42:40 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/14 13:35:52 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:20:01 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 #define FAIL 0
 #define SUCCESS 1
 #define ERROR 2
+
+enum {
+	AMBIENT,
+	CAMERA,
+	LIGHT
+};
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	is_rt_file(char *filename);
@@ -31,5 +37,7 @@ t_color3	parse_rgb(char *str);
 t_vec3	parse_vec(char *str);
 t_point3	parse_point(char *str);
 void	splited_free(char **splited);
+void	init_camera(char **line_splited, t_scene *scene);
+void	init_acl(char **line_splited, t_scene *scene, int *acl, int acl_num);
 
 #endif

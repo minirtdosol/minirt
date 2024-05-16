@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:15:50 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/14 13:46:49 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:47:45 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ struct s_ray
 struct s_camera
 {
 	t_point3	orig; // 카메라 원점(위치)
-	//t_vec3		dir; // 카메라 벡터
-	//t_vec3		right_normal; // 카메라 벡터가 평면이 아닐때 left_bottm을 구하기 위해
-	//t_vec3		up_normal; // ''
-	//double		fov; // 화각
+	t_vec3		dir; // 카메라 벡터
+	t_vec3		right_normal; // 카메라 벡터가 평면이 아닐때 left_bottm을 구하기 위해
+	t_vec3		up_normal; // ''
+	double		fov; // 화각
 	double		viewport_h; // 뷰포트 세로 길이
 	double		viewport_w; // 뷰포트 가로 길이
 	t_vec3		horizontal; // 수평 길이 벡터

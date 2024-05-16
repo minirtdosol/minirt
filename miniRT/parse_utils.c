@@ -6,15 +6,14 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:49:31 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/14 13:35:40 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:11:28 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parse.h"
-# include "libft/libft.h"
+#include "parse.h"
+#include "libft/libft.h"
 #include "scene.h"
 #include "print.h"
-
 
 int	is_rt_file(char *filename)
 {
@@ -47,6 +46,7 @@ t_vec3	parse_vec3(char *str)
 	splited_free(splited);
 	return (vec3);
 }
+
 t_color3	parse_rgb(char *str)
 {
 	t_vec3	vec3;
@@ -67,7 +67,7 @@ t_vec3	parse_vec(char *str)
 
 	vec = parse_vec3(str);
 	if (vec.x < -1 || vec.x > 1 || vec.y < -1 || vec.y > 1
-	|| vec.z < - 1 || vec.z > 1)
+		|| vec.z < -1 || vec.z > 1)
 		print_error("Wrong vector");
 	return (vec);
 }

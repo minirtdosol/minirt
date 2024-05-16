@@ -1,6 +1,6 @@
 NAME = miniRT
 cc = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 MLXFLAG = -lmlx -framework OpenGL -framework AppKit
 SRC =  canvas.c main.c print.c ray.c scene.c utils.c hit_sphere.c phong_lighting.c object_create.c object_utils.c normal.c hit.c hit_plane.c parse_utils.c\
 	parse.c\
