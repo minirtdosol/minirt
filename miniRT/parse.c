@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:10:53 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/14 19:19:44 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:04:58 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	parse_rt(int fd, t_scene *scene)
 		if (ft_strncmp(splited[0],"A",2) == 0)
 			init_acl(splited, scene, acl ,AMBIENT);
 		else if (ft_strncmp(splited[0], "C", 2) == 0)
-			init_acl(splited, scene, acl , CAMERA);
+			init_acl(splited, scene, acl , CAMERA); 
 		else if (ft_strncmp(splited[0], "L", 2) == 0)
 			init_acl(splited, scene, acl , LIGHT);
 		else if (ft_strncmp(splited[0], "cy", 3) == 0)

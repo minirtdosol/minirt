@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:28:28 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/14 13:36:50 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:29:54 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "parse.h"
 # include "libft/libft.h"
 # include "scene.h"
+# include "rotate.h"
 
 void	init_cylinder(char **line_splited, t_object **world)
 {

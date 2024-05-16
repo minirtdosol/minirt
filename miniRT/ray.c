@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:34:42 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/16 11:57:49 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:15:37 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,10 @@ t_hit_record	record_init(void)
 t_ray	ray_primary(t_camera *cam, double u, double v)
 {
 	t_ray	ray;
-	t_vec3	horizontal;
-	t_vec3	vertical;
-	t_point3	viewport_point;
 
 	ray.orig = cam -> orig;
-	horizontal = vmult(cam->right_normal, u);
-    vertical = vmult(cam->up_normal, v);
-    viewport_point = vplus(cam->left_bottom, horizontal);
-    viewport_point = vplus(viewport_point, vertical);
 	// left_bottom + u * horizontal + v * vectical - origin 의 단위 벡터.
-	ray.dir = vunit(vminus(viewport_point, ray.orig));
+	ray.dir = vunit(vminus(vplus(vplus(cam -> left_bottom, vmult(cam -> horizontal, u)), vmult(cam -> vertical, v)), cam -> orig));
 	return (ray);
 }
 

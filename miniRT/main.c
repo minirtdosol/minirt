@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/16 11:57:24 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:08:02 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ t_scene	*scene_init(int fd)
 	//world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
 	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
 	//oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 0.5, 1), color3(0, 0.5, 0)));
-	scene -> camera = camera_init(point3(0, 0, 0), vec3(0, 0, 1), 90);
+	// scene -> camera = camera_init(point3(0, 0, 0), vec3(0, 0, 1), 90);
 	camera(&scene -> canvas, scene -> camera);
-	world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
+	//world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
 	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
-	oadd(&world, object(CY, cylinder(point3(0, 0, -3), rotate_init(vec3(0, 1, 0), 0, 0, 90), 0.5, 1), color3(0, 0.5, 0)));
+	//oadd(&world, object(CY, cylinder(point3(0, 0, -3), rotate_init(vec3(0, 1, 0), 0, 0, 90), 0.5, 1), color3(0, 0.5, 0)));
 	// oadd(&world, object(PL, plane(point3(0, 0, -1), vec3(0, 1, 2)), color3(1, 0.5, 1)));
 	//scene -> world = world;
 	//lights = object(LIGHT_POINT, light_point(point3(0, 5, -3), color3(1, 1, 1), 0.5), color3(0, 0, 0)); //더미 albedo
@@ -58,8 +58,8 @@ int	main(int argc, char *argv[])
 {
 	int			i;
 	int			j;
-	//double		u;
-	//double		v;
+	double		u;
+	double		v;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_color3	pixel_color;
@@ -80,28 +80,28 @@ int	main(int argc, char *argv[])
 	scene = scene_init(fd);
 	close(fd);
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, WIDTH,HEIGHT, "Hellow World!");
+	win_ptr = mlx_new_window(mlx_ptr, scene -> canvas.width, scene -> canvas.height, "Hellow World!");
 	
 	// 랜더링
 	// P3는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값
 	// printf("P3\n%d %d\n255\n", scene -> canvas.width, scene -> canvas.height);
-	j = HEIGHT - 1;
+	j = scene -> canvas.height - 1;
 	while (j >= 0)
 	{
 		i = 0;
-		while (i < WIDTH)
+		while (i < scene -> canvas.width)
 		{
-			//u = (double)i / (scene -> canvas.width - 1);
-			//v = (double)j / (scene -> canvas.height - 1);
+			u = (double)i / (scene -> canvas.width - 1);
+			v = (double)j / (scene -> canvas.height - 1);
 			//ray from camera origin to pixel;
 			scene -> ray = ray_primary(scene -> camera, u, v);
 			pixel_color = ray_color(scene);
+			// write_color(pixel_color);
 			x = (int)(pixel_color.x * 255.999);
 			y = (int)(pixel_color.y * 255.999);
 			z = (int)(pixel_color.z * 255.999);
-			write_color(pixel_color);
-			mlx_pixel_put(mlx_ptr, win_ptr, i, HEIGHT - 1 - j, create_trgb(0,x,y,z));
-			++i;
+			mlx_pixel_put(mlx_ptr, win_ptr, i, scene -> canvas.height - 1 - j, create_trgb(0, x, y, z));
+			i++;
 		}
 		--j;
  	}

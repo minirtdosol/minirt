@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:30:21 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/14 19:17:50 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:05:23 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_acl(char **line_splited, t_scene *scene, int *acl, int acl_num)
 		init_ambient(line_splited, scene);
 	else if (acl_num == CAMERA)
 		init_camera(line_splited, scene);
-	else if (acl_num == LIGHT)
+	else if (acl_num == LIGHT) 
 		init_light(line_splited, scene);
 }
 
@@ -40,7 +40,7 @@ void	init_camera(char **line_splited, t_scene *scene)
 	fov = ft_atod(line_splited[3]);
 	if (fov < 0 || fov > 180)
 		print_error("Wrong fov");
-	scene->camera = camera(&(scene->canvas), point, vec, fov);
+	scene->camera = camera_init(point, vec, fov);
 }
 
 void	init_ambient(char **line_splited, t_scene *scene)
