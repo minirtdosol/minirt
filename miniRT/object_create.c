@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:39:02 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/10 21:28:51 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/16 15:17:33 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_object	*object(t_object_type type, void *element, t_color3 albedo)
 {
 	t_object	*new;
 
-	if (!(new = (t_object *)malloc(sizeof(t_object))))
+	new = (t_object *)malloc(sizeof(t_object));
+	if (!new)
 		return (NULL);
 	new -> type = type;
 	new -> element = element;
@@ -26,12 +27,12 @@ t_object	*object(t_object_type type, void *element, t_color3 albedo)
 	return (new);
 }
 
-
 t_sphere	*sphere(t_point3 center, double radius)
 {
 	t_sphere	*sp;
 
-	if (!(sp = (t_sphere *)malloc(sizeof(t_sphere))))
+	sp = (t_sphere *)malloc(sizeof(t_sphere));
+	if (!sp)
 		return (NULL);
 	sp -> center = center;
 	sp -> radius = radius;
@@ -43,7 +44,8 @@ t_plane	*plane(t_point3 center, t_vec3 dir)
 {
 	t_plane	*pl;
 
-	if (!(pl = (t_plane *)malloc(sizeof(t_plane))))
+	pl = (t_plane *)malloc(sizeof(t_plane));
+	if (!pl)
 		return (NULL);
 	pl -> center = center;
 	dir = vunit(dir);
@@ -55,7 +57,8 @@ t_cylinder	*cylinder(t_point3 center, t_vec3 dir, double dmt, double hgt)
 {
 	t_cylinder	*cy;
 
-	if (!(cy = (t_cylinder *)malloc(sizeof(t_cylinder))))
+	cy = (t_cylinder *)malloc(sizeof(t_cylinder));
+	if (!cy)
 		return (NULL);
 	cy -> center = center;
 	dir = vunit(dir);
@@ -65,11 +68,13 @@ t_cylinder	*cylinder(t_point3 center, t_vec3 dir, double dmt, double hgt)
 	return (cy);
 }
 
-t_light	*light_point(t_point3 light_origin, t_color3 light_color, double bright_ratio)
+t_light	*light_point(t_point3 light_origin, \
+t_color3 light_color, double bright_ratio)
 {
 	t_light	*light;
 
-	if (!(light = (t_light *)malloc(sizeof(t_light))))
+	light = (t_light *)malloc(sizeof(t_light));
+	if (!light)
 		return (NULL);
 	light -> origin = light_origin;
 	light -> light_color = light_color;

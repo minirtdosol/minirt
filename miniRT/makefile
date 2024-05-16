@@ -2,23 +2,58 @@ NAME = miniRT
 cc = cc
 CFLAGS = -Wall -Wextra -Werror
 MLXFLAG = -lmlx -framework OpenGL -framework AppKit
-SRC =  canvas.c main.c print.c ray.c scene.c utils.c hit_sphere.c phong_lighting.c object_create.c object_utils.c normal.c hit.c hit_plane.c hit_cylinder.c rotate.c
+SRC =  canvas.c\
+	main.c\
+	print.c\
+	ray.c\
+	scene.c\
+	hit_sphere.c\
+	phong_lighting.c\
+	object_create.c\
+	object_utils.c\
+	normal.c hit.c\
+	hit_plane.c\
+	parse_utils.c\
+	parse.c\
+	get_next_line.c\
+	get_next_line_utils.c\
+	hit_cylinder.c\
+	hit_cylinder_cap.c\
+	hit_cylinder_side.c\
+	parse_utils.c\
+	init_object.c\
+	init_acl.c\
+	rotate.c\
+	utils.c\
+	utils2.c\
+	utils3.c\
+	utils4.c\
+	mlx_utils.c
+
 OBJ = $(SRC:.c=.o)
+
+LIBFT_DIR = ./libft/
+LIB = $(LIBFT_DIR)libft.a
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) 
-				$(CC) $(CFLAGS) $(OBJ) $(MLXFLAG) -o $@
+$(NAME) : $(LIB) $(OBJ)
+			$(CC) $(CFLAGS) $(MLXFLAG) -o $@ $^
+$(LIB) :
+	$(MAKE) -C $(LIBFT_DIR)
 
 clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
 	rm -rf  $(OBJ)
 
-fclean: 
+fclean:
+	make clean
+	rm -rf $(LIB)
 	rm -rf $(OBJ)
 	rm -rf $(NAME)
 
 re: 
-	make fclean ;\
+	make fclean
 	make all
 
 .PHONY: all clean fclean re

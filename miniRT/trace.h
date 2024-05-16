@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:33:18 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/13 18:37:02 by dokoh            ###   ########.fr       */
+/*   Updated: 2024/05/16 13:35:47 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void		set_face_normal(t_ray *r, t_hit_record *rec);
 t_color3	phong_lighting(t_scene *scene);
 t_color3	point_light_get(t_scene *scene, t_light *light);
 t_bool		in_shadow(t_object *objs, t_ray light_ray, double light_len);
-t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
-int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
-int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double height);
-t_vec3	get_cylinder_normal(t_cylinder *cy, t_vec3 at_point, double hit_height);
-double	cy_boundary(t_cylinder *cy, t_vec3 at_point);
+t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
+int			hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
+int			hit_cylinder_cap(t_object *cy_obj, \
+t_ray *ray, t_hit_record *rec, double height);
+t_vec3		get_cylinder_normal(t_cylinder *cy, \
+t_vec3 at_point, double hit_height);
+double		cy_boundary(t_cylinder *cy, t_vec3 at_point);
 #endif
