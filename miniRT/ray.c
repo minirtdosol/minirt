@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:34:42 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/14 14:48:43 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:57:49 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 	ray.dir = vunit(vminus(viewport_point, ray.orig));
 	return (ray);
 }
+
 
 t_color3	ray_color(t_scene *scene)
 {

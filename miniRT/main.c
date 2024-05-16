@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/14 19:20:36 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:57:24 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 #include "parse.h"
 #include <fcntl.h>
 #include <unistd.h>
-#define HEIGHT 1000
-#define WIDTH 1000
+#include "rotate.h"
 
 t_scene	*scene_init(int fd)
 {
@@ -35,6 +34,11 @@ t_scene	*scene_init(int fd)
 	//world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
 	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
 	//oadd(&world, object(CY, cylinder(point3(0, 0, -3), vec3(0, 1, 0), 0.5, 1), color3(0, 0.5, 0)));
+	scene -> camera = camera_init(point3(0, 0, 0), vec3(0, 0, 1), 90);
+	camera(&scene -> canvas, scene -> camera);
+	world = object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1));
+	// oadd(&world, object(SP, sphere(point3(0, -1000, 0), 999), color3(1, 1, 1)));
+	oadd(&world, object(CY, cylinder(point3(0, 0, -3), rotate_init(vec3(0, 1, 0), 0, 0, 90), 0.5, 1), color3(0, 0.5, 0)));
 	// oadd(&world, object(PL, plane(point3(0, 0, -1), vec3(0, 1, 2)), color3(1, 0.5, 1)));
 	//scene -> world = world;
 	//lights = object(LIGHT_POINT, light_point(point3(0, 5, -3), color3(1, 1, 1), 0.5), color3(0, 0, 0)); //더미 albedo
@@ -90,7 +94,7 @@ int	main(int argc, char *argv[])
 			//u = (double)i / (scene -> canvas.width - 1);
 			//v = (double)j / (scene -> canvas.height - 1);
 			//ray from camera origin to pixel;
-			scene -> ray = ray_primary(&scene -> camera, i, j);
+			scene -> ray = ray_primary(scene -> camera, u, v);
 			pixel_color = ray_color(scene);
 			x = (int)(pixel_color.x * 255.999);
 			y = (int)(pixel_color.y * 255.999);

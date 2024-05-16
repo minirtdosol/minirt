@@ -6,47 +6,47 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:57:08 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/14 16:08:22 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:58:12 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scene.h"
-#define	WIDTH 1000
-#define	HEIGHT 1000
 
-double	get_tan(double degree)
+double	radian(double degrees)
 {
-	static const double radian = M_PI / 180;
-	return (tan(degree * radian));
+	return (degrees * M_PI / 180.0);
 }
 
-t_camera	camera(t_canvas *canvas, t_point3 orig, t_vec3 dir, double fov)
+t_camera *camera_init(t_point3 orig, t_vec3 dir, double fov)
 {
-	t_camera    cam;
-    t_vec3      vec_y;
-    t_vec3      vec_z;
-    t_vec3      temp;
-	(void)canvas;
-    
-    vec_y = vec3(0.0, 1.0, 0.0);
-    vec_z = vec3(0.0, 0.0, -1.0);
-    
-    cam.orig = orig;
-    cam.dir = dir;
-    cam.fov = fov;
-    if (vlength(vcross(vec_y, cam.dir)))
-        cam.right_normal = vunit(vcross(cam.dir, vec_y));
-    else 
-        cam.right_normal = vunit(vcross(cam.dir, vec_z));
-    cam.up_normal = vunit(vcross(cam.right_normal, cam.dir));
-    cam.focal_len = WIDTH / 2 / get_tan(cam.fov / 2);
+	t_camera *camera;
 
-    temp = vplus(cam.orig, vmult(cam.dir, cam.focal_len));
-    temp = vminus(temp, vmult(cam.right_normal, -(WIDTH - 1)/ 2));
-    temp = vminus(temp, vmult(cam.up_normal,-(HEIGHT - 1)/ 2));
-    cam.left_bottom = temp;
-    // print_vec(cam.right_normal);
-    // print_vec(cam.up_normal);
-    // print_vec(cam.left_bottom);
-    return (cam);
+	if (!(camera = (t_camera *)malloc(sizeof(t_camera))))
+		return (NULL);
+	camera -> orig = orig;
+	vunit(dir);
+	camera -> dir = dir;
+	camera -> fov = fov;
+	return (camera);
+
+}
+
+void    camera(t_canvas *canvas, t_camera *cam)
+{
+	t_camera_set	save;
+
+	if (cam -> dir.x == 0 && cam -> dir.z == 0)
+		cam -> dir.z = EPSILON;
+	save.lookat = vplus(cam -> orig, vmult(cam -> dir, -1));  // 수수정 필필요  뷰뷰포트의 중중심
+	save.vup = vec3(0.0, 1.0, 0.0);
+	save.theta = radian(cam -> fov);
+	save.half_width = tan(save.theta / 2);
+	save.viewport_w = 2 * save.half_width;
+	save.viewport_h = save.viewport_w / canvas -> aspect_ratio;
+	save.w = vunit(cam -> dir);
+	save.u = vunit(vcross(save.vup, save.w));
+	save.v = vcross(save.w, save.u);
+	cam -> horizontal = vmult(save.u, save.viewport_w);
+	cam -> vertical = vmult(save.v, save.viewport_h);
+	cam -> left_bottom = vminus(vminus(save.lookat, vdivide(cam -> horizontal, 2)), vdivide(cam -> vertical, 2));
 }
