@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:49:31 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/14 19:11:28 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:00:16 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	is_rt_file(char *filename)
 	int	i;
 
 	i = 0;
+	if (filename == NULL)
+		print_error("Woring file");
 	while (filename[i])
 	{
 		if (filename[i] == '.')
@@ -40,6 +42,8 @@ t_vec3	parse_vec3(char *str)
 	t_vec3	vec3;
 
 	splited = ft_split(str, ',');
+	if (splited_len(splited) != 3)
+		print_error("Woring content in .rt");
 	vec3.x = ft_atod(splited[0]);
 	vec3.y = ft_atod(splited[1]);
 	vec3.z = ft_atod(splited[2]);

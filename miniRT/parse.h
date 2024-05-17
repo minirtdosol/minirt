@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:42:40 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/16 13:34:37 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:56:16 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void		splited_free(char **splited);
 void		init_camera(char **line_splited, t_scene *scene);
 void		init_acl(char **line_splited, \
 t_scene *scene, int *acl, int acl_num);
+int			splited_len(char **splited);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:30:21 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/16 15:10:54 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:57:32 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	init_camera(char **line_splited, t_scene *scene)
 	t_vec3		vec;
 	double		fov;
 
+	if (splited_len(line_splited) != 4)
+		print_error("Woring content in .rt");
 	point = parse_point(line_splited[1]);
 	vec = parse_vec(line_splited[2]);
 	fov = ft_atod(line_splited[3]);
@@ -48,6 +50,8 @@ void	init_ambient(char **line_splited, t_scene *scene)
 	double		ka;
 	t_color3	color;
 
+	if (splited_len(line_splited) != 3)
+		print_error("Woring content in .rt");
 	ka = ft_atod(line_splited[1]);
 	if (ka < 0 || ka > 1)
 		print_error("Wrong ambient");
@@ -61,6 +65,8 @@ void	init_light(char **line_splited, t_scene *scene)
 	double	bright_ratio;
 	t_vec3	color;
 
+	if (splited_len(line_splited) != 4)
+		print_error("Woring content in .rt");
 	point = parse_point(line_splited[1]);
 	bright_ratio = ft_atod(line_splited[2]);
 	if (bright_ratio < 0 || bright_ratio > 1)

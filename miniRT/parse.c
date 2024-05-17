@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:10:53 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/16 17:45:30 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:07:05 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static void	check_acl(int *acl)
 
 static void	init_arg(char **splited, t_scene *scene, int *acl)
 {
+	if (splited == NULL || *splited == NULL)
+		print_error("Wrong in file");
 	if (ft_strncmp(splited[0], "A", 2) == 0)
 		init_acl(splited, scene, acl, AMBIENT);
 	else if (ft_strncmp(splited[0], "C", 2) == 0)
@@ -83,10 +85,26 @@ void	splited_free(char **splited)
 	int	i;
 
 	i = 0;
+	if (splited == NULL || *splited == NULL)
+		return ;
 	while (splited[i])
 	{
 		free(splited[i]);
 		i++;
 	}
 	free(splited);
+}
+
+int	splited_len(char **splited)
+{
+	int	i;
+
+	i = 0;
+	if (splited == NULL || *splited == NULL)
+		return (0);
+	while (splited[i])
+	{
+		i++;
+	}
+	return (i);
 }
