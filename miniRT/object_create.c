@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:39:02 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/16 15:17:33 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:16:20 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_object	*object(t_object_type type, void *element, t_color3 albedo)
 
 	new = (t_object *)malloc(sizeof(t_object));
 	if (!new)
-		return (NULL);
+		exit (1);
 	new -> type = type;
 	new -> element = element;
 	new -> next = NULL;
@@ -33,7 +33,7 @@ t_sphere	*sphere(t_point3 center, double radius)
 
 	sp = (t_sphere *)malloc(sizeof(t_sphere));
 	if (!sp)
-		return (NULL);
+		exit (1);
 	sp -> center = center;
 	sp -> radius = radius;
 	sp -> radius2 = radius * radius;
@@ -46,7 +46,7 @@ t_plane	*plane(t_point3 center, t_vec3 dir)
 
 	pl = (t_plane *)malloc(sizeof(t_plane));
 	if (!pl)
-		return (NULL);
+		exit (1);
 	pl -> center = center;
 	dir = vunit(dir);
 	pl -> dir = dir;
@@ -59,7 +59,7 @@ t_cylinder	*cylinder(t_point3 center, t_vec3 dir, double dmt, double hgt)
 
 	cy = (t_cylinder *)malloc(sizeof(t_cylinder));
 	if (!cy)
-		return (NULL);
+		exit (1);
 	cy -> center = center;
 	dir = vunit(dir);
 	cy -> dir = dir;
@@ -75,7 +75,7 @@ t_color3 light_color, double bright_ratio)
 
 	light = (t_light *)malloc(sizeof(t_light));
 	if (!light)
-		return (NULL);
+		exit (1);
 	light -> origin = light_origin;
 	light -> light_color = light_color;
 	light -> bright_ratio = bright_ratio;

@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:02:13 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/16 17:46:39 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:16:06 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_scene	*scene_init(int fd)
 
 	scene = (t_scene *)malloc(sizeof(t_scene));
 	if (!scene)
-		return (NULL);
+		exit (1);
 	scene -> canvas = canvas(1000, 1000);
 	parse_rt(fd, scene);
 	camera(&scene -> canvas, scene -> camera);
