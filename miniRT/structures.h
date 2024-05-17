@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:15:50 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/16 13:33:03 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:49:02 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCTURES_H
 
 typedef struct s_scene		t_scene;
+typedef struct s_cal		t_cal;
 typedef struct s_vec3		t_vec3;
 typedef struct s_vec3		t_point3;
 typedef struct s_vec3		t_color3;
@@ -39,6 +40,15 @@ typedef int					t_object_type;
 # define LIGHT_POINT 1
 # define EPSILON 1e-6
 # define LUMEN 3
+
+struct s_cal
+{
+	double	a;
+	double	half_b;
+	double	discriminant;
+	double	root;
+	double	hit_height;
+};
 
 struct s_vec3
 {
