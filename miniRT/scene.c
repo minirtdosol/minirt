@@ -6,7 +6,7 @@
 /*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:57:08 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/16 15:31:49 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:16:29 by soljeong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_camera	*camera_init(t_point3 orig, t_vec3 dir, double fov)
 
 	camera = (t_camera *)malloc(sizeof(t_camera));
 	if (!camera)
-		return (NULL);
+		exit (1);
 	camera -> orig = orig;
 	vunit(dir);
 	camera -> dir = dir;
