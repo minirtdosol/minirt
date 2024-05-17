@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:49:31 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/17 13:00:16 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:18:33 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_color3	parse_rgb(char *str)
 	t_vec3	vec3;
 
 	vec3 = parse_vec3(str);
-	if (vec3.x < 0 || vec3.x > 256 || vec3.y < 0 \
-	|| vec3.y > 256 || vec3.z < 0 || vec3.z > 256)
+	if (vec3.x < 0 || vec3.x > 255 || vec3.y < 0 \
+	|| vec3.y > 255 || vec3.z < 0 || vec3.z > 255)
 		print_error("Wrong rgb");
 	vec3.x = vec3.x / 255;
 	vec3.y = vec3.y / 255;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder_cap.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:49:16 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/16 14:52:51 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:48:48 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void		hit_cylinder_rec(t_object *cy_obj, t_hit_record *rec, \
 double height, t_ray *ray);
-static float	calcul_root(t_object *cy_obj, t_ray *ray, \
+static double	calcul_root(t_object *cy_obj, t_ray *ray, \
 double height, int *flag);
 
 int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, \
@@ -24,8 +24,8 @@ t_hit_record *rec, double height)
 {
 	t_cylinder	*cy;
 	t_vec3		circle_center;
-	float		root;
-	float		diameter;
+	double		root;
+	double		diameter;
 	int			flag;
 
 	flag = 1;
@@ -45,13 +45,13 @@ t_hit_record *rec, double height)
 	return (1);
 }
 
-static float	calcul_root(t_object *cy_obj, t_ray *ray, \
+static double	calcul_root(t_object *cy_obj, t_ray *ray, \
 double height, int *flag)
 {
 	t_cylinder	*cy;
 	t_vec3		circle_center;
-	float		down;
-	float		up;
+	double		down;
+	double		up;
 
 	cy = cy_obj->element;
 	circle_center = vplus(cy->center, vmult(cy->dir, height));

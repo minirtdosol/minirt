@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:50:39 by dokoh             #+#    #+#             */
-/*   Updated: 2024/05/16 15:09:22 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:36:58 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 		return (FALSE);
 	root = (-half_b - sqrt(discriminant)) / a;
 	if (root < rec -> tmin || rec -> tmax < root)
-		return (FALSE);
+	{
+		root = (-half_b + sqrt(discriminant)) / a;
+		if (root < rec -> tmin || rec -> tmax < root)
+			return (FALSE);
+	}
 	rec -> t = root;
 	rec -> p = ray_at(ray, root);
 	rec -> normal = vdivide(vminus(rec -> p, sp -> center), sp -> radius);

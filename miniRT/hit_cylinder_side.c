@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder_side.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soljeong <soljeong@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dokoh <dokoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:44:31 by soljeong          #+#    #+#             */
-/*   Updated: 2024/05/16 14:54:30 by soljeong         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:37:24 by dokoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 		return (FALSE);
 	root = (-half_b - sqrt((discriminant))) / a;
 	if (root < rec -> tmin || rec -> tmax < root)
-		return (FALSE);
+	{
+		root = (-half_b + sqrt((discriminant))) / a;
+		if (root < rec -> tmin || rec -> tmax < root)
+			return (FALSE);
+	}
 	hit_height = cy_boundary(cy_obj->element, ray_at(ray, root));
 	if (!(hit_height))
 		return (0);
